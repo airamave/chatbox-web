@@ -3,15 +3,35 @@ import { connect } from 'react-redux';
 import  { login } from '../../redux/actions/user.actions';
 
 class Login extends Component {
+    state = {
+        email: '',
+        password: ''
+    }
+   
+    handle = (event, field) => {
+
+    this.setState({
+        [field]: event.target.value
+    })
+    }
+
     render() {
+        const{ email, password } = this.state;
         return(
             <div className="login-container">
                 <span>Login</span>
                 <label>email/username</label>
-                <input placeholder="email/username" />
+                <input onChange={(event) => this.handle(event, 'email')}
+                 value={email}
+                 placeholder="email/username" />
                 <label>password</label>
-                <input placeholder="password" />
-                <button onClick={() => this.props.login()}>Login</button>
+                <input onChange={(event) => this.handle(event, 'password')}
+                 value={password}
+                 placeholder="password" />
+                <div className="button-login">
+                    <button onClick={() => this.props.login({ email, password })}>Login</button>
+                    <button>Sign up!</button>
+                </div>
             </div>
         );
     }
@@ -28,3 +48,5 @@ const mapStateToProps = state => {
   }
   
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+

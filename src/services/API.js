@@ -5,7 +5,7 @@ export class API {
     this.baseUrl = baseUrl;
   }
 
-  makeRequest({ url, method, data }) {
+  makeRequest = ({ url, method, data }) => {
     return axios({
       url: `${this.baseUrl}/${url}`,
       method,

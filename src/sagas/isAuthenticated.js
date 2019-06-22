@@ -1,8 +1,26 @@
-import { takeLatest } from 'redux-saga/effects';
-import { LOGIN } from '../constants'
+import { takeLatest, call } from 'redux-saga/effects';
+import { LOGIN, SIGNUP, AUTHENTICATED } from '../constants'
+import UserAPI from '../services/UserAPI';
 
-function* isAuthenticated() {
-     console.log('is authenticated saga')
+function* isAuthenticated(action) {
+     const {payload} = action
+     try {
+          const response = yield call (UserAPI.login, payload);
+          console.log('is auth', response);
+     } catch (error) {
+          console.log(error);
+     }
 }
 
-export default [takeLatest(LOGIN, isAuthenticated)];
+function* user(action) {
+     const {payload} = action;
+     try {
+          const response = yield call (UserAPI.signup, payload);
+          console.log('new', response);
+     } catch (error) {
+          console.log(error);          
+     }
+     console.log(' new user ')
+}
+
+export default [takeLatest(SIGNUP, user)];

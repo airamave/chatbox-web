@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/createStore';
 import  { login } from './redux/actions/user.actions'
 import './App.css';
-import { LOGIN } from './constants';
-
+import { LOGIN, SIGNUP } from './constants';
 
 import Login from './Containers/Login';
-//import Signup from './Components/Signup';
+import Signup from './Containers/Signup';
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/Home" component={() => "Home"} />
-        <Route path="/" component={Login} />
+        <Route path="/" component={Signup} />
       </Switch>
     </Router>
   </div>
